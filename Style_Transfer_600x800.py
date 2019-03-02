@@ -46,10 +46,8 @@ def gram_matrix(A):
     Returns:
     GA -- Gram matrix of A, of shape (n_C, n_C)
     """
-    
-    ### START CODE HERE ### (≈1 line)
+
     GA = tf.matmul(A, tf.transpose(A)) # '*' is elementwise mul in numpy
-    ### END CODE HERE ###
     
     return GA
 
@@ -64,8 +62,8 @@ def compute_layer_style_cost(a_S, a_G):
     Returns: 
     J_style_layer -- tensor representing a scalar value, style cost defined above by equation (2)
     """
-    
-    ### START CODE HERE ###
+
+
     # Retrieve dimensions from a_G (≈1 line)
     m, n_H, n_W, n_C = a_G.get_shape().as_list()
     
@@ -79,8 +77,7 @@ def compute_layer_style_cost(a_S, a_G):
 
     # Computing the loss (≈1 line)
     J_style_layer = tf.reduce_sum((GS - GG)**2) / (4 * n_C**2 * (n_W * n_H)**2)
-    
-    ### END CODE HERE ###
+
     
     return J_style_layer
 
@@ -96,8 +93,7 @@ def compute_layer_style_cost(a_S, a_G):
     Returns: 
     J_style_layer -- tensor representing a scalar value, style cost defined above by equation (2)
     """
-    
-    ### START CODE HERE ###
+
     # Retrieve dimensions from a_G (≈1 line)
     m, n_H, n_W, n_C = a_G.get_shape().as_list()
     
@@ -111,8 +107,7 @@ def compute_layer_style_cost(a_S, a_G):
 
     # Computing the loss (≈1 line)
     J_style_layer = tf.reduce_sum((GS - GG)**2) / (4 * n_C**2 * (n_W * n_H)**2)
-    
-    ### END CODE HERE ###
+
     
     return J_style_layer
 
@@ -173,17 +168,15 @@ def total_cost(J_content, J_style, alpha = 10, beta = 40):
     Returns:
     J -- total cost as defined by the formula above.
     """
-    
-    ### START CODE HERE ### (≈1 line)
+
     J = alpha * J_content + beta * J_style
-    ### END CODE HERE ###
     
     return J
 
 
 
 
-def model_nn(sess, input_image, num_iterations = 200, size = "600x800"):
+def model_nn(sess, input_image, num_iterations = 200):
     
     # Initialize global variables (you need to run the session on the initializer)
     ### START CODE HERE ### (1 line)
@@ -217,7 +210,7 @@ def model_nn(sess, input_image, num_iterations = 200, size = "600x800"):
             save_image(str(i) + ".png", generated_image)
     
     # save last generated image
-    save_image('generated_image' + size + '.jpg', generated_image)
+    save_image('generated_image' + '.jpg', generated_image)
     
     return generated_image
 
@@ -299,7 +292,7 @@ sess = tf.InteractiveSession()
 
 
 
-# What does this do?
+# What does this do? Why is it deprecated?
 content_image = scipy.misc.imread(CONTENT_IMAGE)
 print("Reading content image.")
 content_image = reshape_and_normalize_image(content_image)
